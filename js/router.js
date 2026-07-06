@@ -1,29 +1,27 @@
-// router.js - Navegación entre secciones con control de KYC y Telegram
+// router.js - Navegación entre secciones
 import { Header } from './components/header.js';
 import { Menu } from './modules/menu.js';
 import { Splash } from './components/splash.js';
-import { storage } from './storage.js';
-import { telegram } from './telegram.js';
+import { Storage } from './storage.js';
+import { Telegram } from './telegram.js';
 
 export const Router = {
     _currentRoute: null,
     _routes: {},
+    _user: null,
 
-    /**
-     * Registra las rutas disponibles y arranca la app
-     */
     init: async () => {
         // 1. Configurar Telegram
+        const tg = Telegram._instance || Telegram.init();
         if (tg) {
             tg.expand();
             tg.ready();
-            // Escuchar cambios de tema
             tg.onEvent('themeChanged', () => {
                 document.documentElement.setAttribute('data-theme', tg.colorScheme || 'light');
             });
         }
 
-        // 2. Registrar rutas (mapeo nombre → función importadora)
+        // 2. Registrar rutas
         Router._routes = {
             dashboard: () => import('./modules/dashboard.js').then(m => m.Dashboard),
             kyc: () => import('./modules/kyc.js').then(m => m.KYC),
@@ -34,51 +32,44 @@ export const Router = {
             calculator: () => import('./modules/calculator.js').then(m => m.Calculator)
         };
 
-        // 3. Navegación por hash (URL)
+        // 3. Navegación por hash
         window.addEventListener('hashchange', () => {
             const route = window.location.hash.replace('#', '') || 'dashboard';
             Router.navigate(route, { fromHash: true });
         });
 
-        // 4. Navegación por menú (evento custom)
+        // 4. Navegación por menú
         document.addEventListener('menu-navigate', (e) => {
             Router.navigate(e.detail.route);
         });
 
-        // 5. Mostrar Splash mientras se carga el perfil
+        // 5. Cargar perfil de usuario
         Splash.show('Cargando perfil...');
         try {
-            // Verificar si el usuario tiene KYC aprobado
-            const user = await storage.getUser();
-            Router._user = user;
+            Router._user = Storage.get('user') || null;
         } catch (error) {
             console.warn('Error al cargar perfil:', error);
         }
         Splash.hide();
 
-        // 6. Navegar a la ruta inicial (o a KYC si no está aprobado)
+        // 6. Navegar a la ruta inicial
         const initial = window.location.hash.replace('#', '') || 'dashboard';
         Router.navigate(initial);
     },
 
-    /**
-     * Navega a una ruta (con verificación de KYC)
-     */
     navigate: async (route, options = {}) => {
         if (Router._currentRoute === route && !options.force) return;
 
-        // --- VERIFICACIÓN DE KYC ---
         const publicRoutes = ['kyc', 'dashboard', 'profile'];
-        const user = Router._user || await storage.getUser();
+        const user = Router._user || Storage.get('user');
 
-        // Si la ruta NO es pública y el usuario no tiene KYC aprobado, redirigir a KYC
+        // Verificar KYC
         if (!publicRoutes.includes(route) && (!user || user.kycStatus !== 'APROBADO')) {
             console.warn(`🔒 Ruta protegida: ${route}. Redirigiendo a KYC.`);
             window.location.hash = 'kyc';
             route = 'kyc';
         }
 
-        // --- OBTENER MÓDULO ---
         const loader = Router._routes[route];
         if (!loader) {
             console.error(`Ruta no registrada: ${route}`);
@@ -89,37 +80,27 @@ export const Router = {
             const Module = await loader();
             Router._currentRoute = route;
 
-            // Actualizar hash (si no viene de un cambio de hash)
             if (!options.fromHash) {
                 window.location.hash = route;
             }
 
-            // Renderizar Header
             Header.render(Module.title || 'PPABS');
 
-            // Renderizar contenido principal
             const main = document.getElementById('app-main');
-            if (Module.render) {
-                main.innerHTML = await Module.render(user);
-            } else {
-                main.innerHTML = '<p>Módulo en construcción</p>';
-            }
+            main.innerHTML = Module.render ? await Module.render(user) : '<p>Módulo en construcción</p>';
 
-            // Renderizar menú (solo si está visible)
             Menu.render(route, user);
 
-            // Inicializar el módulo (si tiene init)
             if (Module.init && typeof Module.init === 'function') {
                 await Module.init(user);
             }
 
-            // Actualizar botón "Atrás" de Telegram
+            // Botón atrás de Telegram
+            const tg = Telegram._instance;
             if (tg && tg.BackButton) {
                 if (route !== 'dashboard') {
                     tg.BackButton.show();
-                    tg.BackButton.onClick(() => {
-                        window.history.back();
-                    });
+                    tg.BackButton.onClick(() => window.history.back());
                 } else {
                     tg.BackButton.hide();
                 }
@@ -138,8 +119,5 @@ export const Router = {
         }
     },
 
-    /**
-     * Obtiene la ruta actual
-     */
     getCurrentRoute: () => Router._currentRoute
 };

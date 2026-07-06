@@ -1,8 +1,5 @@
 // storage.js - Manejo de almacenamiento local
 export const Storage = {
-    /**
-     * Guarda datos en localStorage
-     */
     set: (key, value) => {
         try {
             localStorage.setItem(key, JSON.stringify(value));
@@ -11,9 +8,6 @@ export const Storage = {
         }
     },
 
-    /**
-     * Recupera datos de localStorage
-     */
     get: (key, defaultValue = null) => {
         try {
             const item = localStorage.getItem(key);
@@ -24,17 +18,21 @@ export const Storage = {
         }
     },
 
-    /**
-     * Elimina una clave
-     */
     remove: (key) => {
         localStorage.removeItem(key);
     },
 
-    /**
-     * Limpia todo
-     */
     clear: () => {
         localStorage.clear();
+    },
+
+    // NUEVO: Obtener usuario guardado
+    getUser: () => {
+        return Storage.get('user');
+    },
+
+    // NUEVO: Guardar usuario
+    setUser: (user) => {
+        Storage.set('user', user);
     }
 };
