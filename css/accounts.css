@@ -1,0 +1,15 @@
+/* css/accounts.css - Estilos para la sección de cuentas */
+.accounts-container {
+    padding: 20px;
+}
+.account-card {
+    background: var(--card-bg);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 12px;
+    border: 1px solid var(--border-color);
+}
+.account-card .label {
+    font-weight: bold;
+    color: var(--accent);
+}

@@ -1,6 +1,6 @@
 // router.js - Navegación entre secciones con control de KYC y Telegram
 import { Header } from './components/header.js';
-import { Menu } from './components/menu.js';
+import { Menu } from './modules/menu.js';
 import { Splash } from './components/splash.js';
 import { storage } from './storage.js';
 import { telegram } from './telegram.js';
