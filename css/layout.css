@@ -1,0 +1,88 @@
+/* layout.css - Estructura general */
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color var(--transition), color var(--transition);
+    padding: 0;
+    margin: 0;
+}
+
+#app-root {
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--container-bg);
+    box-shadow: var(--shadow-lg);
+    position: relative;
+}
+
+#app-header {
+    flex-shrink: 0;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--container-bg);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+#app-main {
+    flex: 1;
+    padding: 16px;
+    overflow-y: auto;
+}
+
+#app-menu {
+    flex-shrink: 0;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--container-bg);
+    display: flex;
+    justify-content: space-around;
+    padding: 8px 0;
+    position: sticky;
+    bottom: 0;
+    z-index: 10;
+}
+
+.section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.section.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Utilidades */
+.hidden {
+    display: none !important;
+}
+.text-center {
+    text-align: center;
+}
+.mt-1 {
+    margin-top: 8px;
+}
+.mt-2 {
+    margin-top: 16px;
+}
+.mb-1 {
+    margin-bottom: 8px;
+}
+.mb-2 {
+    margin-bottom: 16px;
+}

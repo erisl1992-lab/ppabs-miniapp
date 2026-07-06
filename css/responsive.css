@@ -1,0 +1,55 @@
+/* responsive.css - Adaptaciones móviles */
+@media (max-width: 480px) {
+    #app-root {
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    #app-header {
+        padding: 10px 12px;
+    }
+
+    #app-main {
+        padding: 12px;
+    }
+
+    .dashboard-metrics {
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .metric-value {
+        font-size: 22px;
+    }
+
+    .kyc-form input,
+    .kyc-form select {
+        font-size: 15px;
+        padding: 10px 12px;
+    }
+
+    .transaction-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+    }
+
+    .toast {
+        font-size: 13px;
+        padding: 10px 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .dashboard-metrics {
+        grid-template-columns: 1fr 1fr;
+        gap: 6px;
+    }
+    .metric-card {
+        padding: 10px;
+    }
+    .metric-value {
+        font-size: 18px;
+    }
+}

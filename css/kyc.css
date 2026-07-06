@@ -1,0 +1,51 @@
+/* kyc.css - Formulario y gestión KYC */
+.kyc-form .form-group {
+    margin-bottom: 16px;
+}
+
+.kyc-form label {
+    display: block;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--text-color);
+}
+
+.kyc-form input,
+.kyc-form select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 2px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 16px;
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: border-color var(--transition);
+}
+
+.kyc-form input:focus,
+.kyc-form select:focus {
+    border-color: var(--accent);
+    outline: none;
+}
+
+.kyc-status-banner {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 16px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.kyc-status-banner.review {
+    background: var(--status-validando-bg);
+    color: var(--status-validando-text);
+}
+.kyc-status-banner.approved {
+    background: var(--status-completado-bg);
+    color: var(--status-completado-text);
+}
+.kyc-status-banner.rejected {
+    background: var(--status-cancelado-bg);
+    color: var(--status-cancelado-text);
+}

@@ -1,0 +1,14 @@
+{
+  "build": {
+    "command": "echo 'No build step needed'"
+  },
+  "output": {
+    "path": "."
+  },
+  "routes": [
+    {
+      "src": ".*",
+      "dest": "index.html"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+:root {
+    /* ===== COLORES BASE (modo claro) ===== */
+    --bg-color: #f4f6f9;
+    --container-bg: #ffffff;
+    --text-color: #1a1a2e;
+    --text-muted: #6b7280;
+    --border-color: #e1e4e8;
+    --shadow-color: rgba(0, 0, 0, 0.06);
+
+    /* ===== ACENTOS ===== */
+    --accent: #0070ba;
+    --accent-hover: #005c99;
+    --success: #28a745;
+    --danger: #d9534f;
+    --warning: #f0ad4e;
+    --info: #17a2b8;
+
+    /* ===== ESTADOS ===== */
+    --status-validando-bg: #fff3cd;
+    --status-validando-text: #856404;
+    --status-enproceso-bg: #d1ecf1;
+    --status-enproceso-text: #0c5460;
+    --status-procesomanual-bg: #fef3c7;
+    --status-procesomanual-text: #78350f;
+    --status-completado-bg: #d4edda;
+    --status-completado-text: #155724;
+    --status-cancelado-bg: #f8d7da;
+    --status-cancelado-text: #721c24;
+
+    /* ===== TIPOGRAFÍA ===== */
+    --font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-size-base: 16px;
+
+    /* ===== SOMBRAS ===== */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+    --shadow-md: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 40px rgba(0, 0, 0, 0.12);
+
+    /* ===== BORDES ===== */
+    --radius: 12px;
+    --radius-sm: 8px;
+
+    /* ===== TRANSICIONES ===== */
+    --transition: 0.2s ease;
+}
+
+/* ===== TEMA OSCURO ===== */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: #1c1c1e;
+        --container-bg: #2c2c2e;
+        --text-color: #e5e5e5;
+        --text-muted: #9ca3af;
+        --border-color: #3a3a3c;
+        --shadow-color: rgba(0, 0, 0, 0.3);
+        --status-validando-bg: #3a2a1a;
+        --status-validando-text: #f0d080;
+        --status-enproceso-bg: #1a2a3a;
+        --status-enproceso-text: #80b0d0;
+        --status-procesomanual-bg: #3a2a1a;
+        --status-procesomanual-text: #f0d080;
+        --status-completado-bg: #1a3a2a;
+        --status-completado-text: #80d0a0;
+        --status-cancelado-bg: #3a1a1a;
+        --status-cancelado-text: #d08080;
+    }
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>PPABS - Pasarela de Servicios</title>
+
+    <!-- ===== CSS ===== -->
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/dashboard.css" />
+    <link rel="stylesheet" href="css/kyc.css" />
+    <link rel="stylesheet" href="css/paypal.css" />
+    <link rel="stylesheet" href="css/profile.css" />
+    <link rel="stylesheet" href="css/transactions.css" />
+    <link rel="stylesheet" href="css/accounts.css" />
+    <link rel="stylesheet" href="css/toast.css" />
+    <link rel="stylesheet" href="css/splash.css" />
+    <link rel="stylesheet" href="css/responsive.css" />
+
+    <!-- ===== LIBRERÍAS EXTERNAS (no modulares) ===== -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- PayPal SDK (client-id se configurará dinámicamente desde config.js) -->
+    <script id="paypal-sdk" src="EOFxic7R-2GePXhf7Oga0KBDD8h5tBNVf8QR5rqnyxakicToGEzRCcPi49CXsIqt0z2rnwODzqAoGBin"></script>
+
+    <!-- ===== FAVICON ===== -->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+</head>
+<body>
+
+    <!-- SPLASH SCREEN -->
+    <div id="splash-screen">
+        <div class="splash-content">
+            <img src="assets/logo.png" alt="PPABS" class="splash-logo" />
+            <div class="splash-loader"></div>
+            <p class="splash-text">Cargando plataforma...</p>
+        </div>
+    </div>
+
+    <!-- APP ROOT -->
+    <div id="app-root">
+        <header id="app-header"></header>
+        <main id="app-main"></main>
+        <nav id="app-menu"></nav>
+    </div>
+
+    <!-- MODAL GLOBAL -->
+    <div id="global-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content"></div>
+    </div>
+
+    <!-- TOAST CONTAINER -->
+    <div id="toast-container"></div>
+
+    <!-- =========================================================== -->
+    <!-- PUNTO DE ENTRADA PRINCIPAL (ES Module)                      -->
+    <!-- =========================================================== -->
+    <script type="module" src="js/app.js"></script>
+
+</body>
+</html>

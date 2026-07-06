@@ -1,0 +1,12 @@
+{
+  "name": "ppabs-webapp",
+  "version": "1.0.0",
+  "description": "PPABS - Frontend WebApp modular",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -s . -l $PORT"
+  },
+  "dependencies": {
+    "serve": "^14.0.0"
+  }
+}

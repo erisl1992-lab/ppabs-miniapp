@@ -1,0 +1,51 @@
+/* dashboard.css - Panel de inicio */
+.dashboard-metrics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.metric-card {
+    background: var(--bg-color);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+
+.metric-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.metric-label {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.dashboard-recent {
+    background: var(--bg-color);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    border: 1px solid var(--border-color);
+}
+
+.dashboard-recent h3 {
+    font-size: 16px;
+    margin-bottom: 12px;
+}
+
+.dashboard-recent-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 14px;
+}
+
+.dashboard-recent-item:last-child {
+    border-bottom: none;
+}
