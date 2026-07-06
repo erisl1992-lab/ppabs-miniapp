@@ -4,7 +4,7 @@ const CONFIG = {
     API_BASE_URL: 'https://ppabs-backend-production.up.railway.app/api', // 
 
     // ===== PAYPAL =====
-    PAYPAL_CLIENT_ID: 'ATgqwZuE58Vd0FT7HkYVTrM4o7DUXb7trhlhPYaVc3MxQA8ybs-MUy1a0LhJ7ygFDFbJdRxjkzXatdCG', // 
+    PAYPAL_CLIENT_ID: 'AYnEX-4Py6-3zwkh6VBPdMlUdcZZ_MPHwQ0RdoRlg-5D7NWpbz2lV4_9Oi6V57oA-5r__Zs_kXy_vi3V', // 
 
     // ===== TELEGRAM =====
     TELEGRAM_BOT_USERNAME: 'ppabsminiappbot', // 
