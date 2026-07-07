@@ -4,7 +4,7 @@ import { Storage } from './storage.js';
 
 export const API = {
     /**
-     * Realiza una petición autenticada (con token de admin)
+     * Realiza una petición al backend con autenticación opcional
      */
     async request(endpoint, options = {}) {
         const url = `${CONFIG.API_BASE_URL}${endpoint}`;
@@ -15,6 +15,7 @@ export const API = {
             ...options.headers
         };
 
+        // Si hay token, añadirlo al header (para rutas de admin)
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
@@ -28,7 +29,8 @@ export const API = {
             const response = await fetch(url, config);
             const data = await response.json();
             if (!response.ok) {
-                throw new Error(data.error || `HTTP ${response.status}`);
+                const errorMsg = data.error || data.message || `HTTP ${response.status}`;
+                throw new Error(errorMsg);
             }
             return data;
         } catch (error) {
@@ -48,9 +50,7 @@ export const API = {
             method: 'PUT',
             body: JSON.stringify({ status })
         }),
-        listAll: () => API.request('/kyc', {
-            headers: { 'Authorization': `Bearer ${Storage.get('adminToken')}` }
-        })
+        listAll: () => API.request('/kyc', {}) // El token se añade automáticamente si existe
     },
 
     // ===== TRANSACCIONES =====
@@ -62,7 +62,7 @@ export const API = {
         get: (id) => API.request(`/transactions/${id}`),
         list: (params = {}) => {
             const query = new URLSearchParams(params).toString();
-            return API.request(`/transactions?${query}`);
+            return API.request(`/transactions${query ? '?' + query : ''}`);
         },
         updateStatus: (id, status) => API.request(`/transactions/${id}`, {
             method: 'PUT',
