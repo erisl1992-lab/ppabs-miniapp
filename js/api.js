@@ -16,10 +16,9 @@ export const API = {
         };
 
         // Si hay token, añadirlo al header (para rutas de admin)
-        if (token) {
-            headers['Authorization'] = `Bearer ${token}`;
-        }
-
+        if (token && endpoint.startsWith('/admin') || endpoint === '/kyc' || endpoint === '/transactions' && !endpoint.includes('?')) {
+    headers['Authorization'] = `Bearer ${token}`;
+}
         const config = {
             ...options,
             headers
